@@ -12,6 +12,7 @@ import com.zebra.sdk.printer.ZebraPrinterLinkOs;
 import com.zebra.sdk.printer.discovery.BluetoothDiscoverer;
 import com.zebra.sdk.printer.discovery.DiscoveredPrinter;
 import com.zebra.sdk.printer.discovery.DiscoveryHandler;
+import com.zebra.sdk.printer.ZebraPrinter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +78,12 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     System.out.println("with arguments: {mac:" + call.argument("mac") + ", data: " + call.argument("data") + "}");
                 }
                 sendZplOverBluetooth((String) call.argument("mac"), (String) call.argument("data"), result);
+                break;
+            case "sendCpclOverBluetooth":
+                if (DEBUG) {
+                    System.out.println("with arguments: {mac:" + call.argument("mac") + ", data: " + call.argument("data") + "}");
+                }
+                sendCpclOverBluetooth((String) call.argument("mac"), (String) call.argument("data"), result);
                 break;
 
             default:
