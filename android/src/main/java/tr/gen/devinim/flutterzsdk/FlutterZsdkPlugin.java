@@ -237,7 +237,45 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
         }
 
     }
+    private void sendCpclOverBluetooth(final String mac, final String data, final Result result) {
 
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    // Instantiate connection for given Bluetooth&reg; MAC Address.
+                    Connection connection = new BluetoothConnection(mac);
+                    // Initialize
+                    Looper.prepare();
+
+                    // Open the connection - physical connection is established here.
+                    connection.open();
+
+                    // Send the data to printer as a byte array.
+                        // Open the connection - physical connection is established here.
+                    ZebraPrinter zPrinterIns = ZebraPrinterFactory.getInstance(connection);
+                    zPrinterIns.sendCommand(data);
+                    zPrinterIns.sendCommand("FORM");
+                    zPrinterIns.sendCommand("PRINT");
+
+         
+
+                    // Make sure the data got to the printer before closing the connection
+                    Thread.sleep(500);
+
+                    // Close the connection to release resources.
+                    connection.close();
+
+                    result.success("wrote " + data.getBytes().length + "bytes");
+
+                    Looper.myLooper().quit();
+                } catch (Exception e) {
+                    result.error(e.getMessage(), null, null);
+                    // Handle communications error here.
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
     private void sendZplOverBluetooth(final String mac, final String data, final Result result) {
 
         new Thread(new Runnable() {
