@@ -16,6 +16,7 @@ class ZebraBluetoothDevice {
   }
 
   Future<void> sendZplOverBluetooth(String data) => FlutterZsdk._sendZplOverBluetooth(mac, data);
+  Future<void> sendCpclOverBluetooth(String data) => FlutterZsdk._sendCpclOverBluetooth(mac, data);
 
   Future<bool> isOnline() => FlutterZsdk._isOnline(mac);
 }
@@ -52,6 +53,9 @@ class FlutterZsdk {
 
   static Future<void> _sendZplOverBluetooth(String mac, String data) async {
     await _channel.invokeMethod("sendZplOverBluetooth", {"mac": mac, "data": data});
+  }
+   static Future<void> _sendCpclOverBluetooth(String mac, String data) async {
+    await _channel.invokeMethod("sendCpclOverBluetooth", {"mac": mac, "data": data});
   }
 
   static Future<bool> _isOnline(String mac) async {
