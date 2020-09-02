@@ -256,7 +256,10 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
 
                     // Open the connection - physical connection is established here.
                     connection.open();
-
+                    if (DEBUG) {
+                        System.out.println("sendCpclOverBluetooth:  [" + data.getBytes().toString() + "]");
+                    }
+                    data = data+"\r\nFORM\r\nPRINT";
                     // Send the data to printer as a byte array.
                     connection.write(data.getBytes());
 
