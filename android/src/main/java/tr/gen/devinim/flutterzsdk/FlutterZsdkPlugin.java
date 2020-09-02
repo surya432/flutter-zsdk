@@ -205,7 +205,8 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
             result.success(printer.getSettingValue("power.percent_full"));
 
         } catch (Exception e) {
-            result.error(e.getMessage(), null, null);
+          System.out.println("getDeviceProperties: " + e.getMessage());
+
         }
     }
 
@@ -240,7 +241,9 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                 }
             }
         } catch (Exception e) {
-            result.error(e.getMessage(), null, null);
+                                System.out.println("getDeviceProperties: " + e.getMessage());
+
+//             result.error(e.getMessage(), null, null);
         }
 
     }
@@ -261,7 +264,7 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     }
                     data = data+"\r\nFORM\r\nPRINT";
                     // Send the data to printer as a byte array.
-                    connection.write(data.getBytes());
+                    connection.write(data.getBytes('ISO-8859-1'));
 
                     // Make sure the data got to the printer before closing the connection
                     Thread.sleep(500);
@@ -269,7 +272,7 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     // Close the connection to release resources.
                     connection.close();
 
-                    result.success("wrote " + data.getBytes().length + "bytes");
+//                     result.success("wrote " + data.getBytes().length + "bytes");
 
                     Looper.myLooper().quit();
                 } catch (Exception e) {
@@ -302,7 +305,7 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     // Close the connection to release resources.
                     connection.close();
 
-                    result.success("wrote " + data.getBytes().length + "bytes");
+//                     result.success("wrote " + data.getBytes().length + "bytes");
 
                     Looper.myLooper().quit();
                 } catch (Exception e) {
