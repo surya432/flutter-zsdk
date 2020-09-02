@@ -258,11 +258,8 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     connection.open();
 
                     // Send the data to printer as a byte array.
-                        // Open the connection - physical connection is established here.
-                    ZebraPrinter zPrinterIns = ZebraPrinterFactory.getInstance(connection);
-                    zPrinterIns.sendCommand(data);
-                    zPrinterIns.sendCommand("FORM");
-                    zPrinterIns.sendCommand("PRINT");
+                    connection.write(data.getBytes());
+
 
          
 
