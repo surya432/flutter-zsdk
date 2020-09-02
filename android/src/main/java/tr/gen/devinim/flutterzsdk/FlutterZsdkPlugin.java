@@ -263,9 +263,6 @@ public class FlutterZsdkPlugin implements MethodCallHandler {
                     // Send the data to printer as a byte array.
                     connection.write(data.getBytes());
 
-
-         
-
                     // Make sure the data got to the printer before closing the connection
                     Thread.sleep(500);
 
